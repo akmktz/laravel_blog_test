@@ -38,9 +38,7 @@ class BlogsController extends Controller
     {
         $blogsList = $this->repository->paginate();
 
-        return response()->json([
-            'data' => $blogsList,
-        ]);
+        return response()->json($blogsList);
     }
 
 
@@ -53,11 +51,9 @@ class BlogsController extends Controller
      */
     public function show($id)
     {
-        $blogItem = $this->repository->find($id);
+        $response = $this->repository->find($id);
 
-        return response()->json([
-            'data' => $blogItem,
-        ]);
+        return response()->json($response);
     }
 
 
@@ -71,14 +67,9 @@ class BlogsController extends Controller
      */
     public function store(BlogCreateRequest $request)
     {
-        $blogItem = $this->repository->create($request->validated());
+        $response = $this->repository->create($request->validated());
 
-        $response = [
-            'message' => 'Blog created.',
-            'data' => $blogItem,
-        ];
-
-        return response()->json($response);
+        return response()->json($response, 201);
     }
 
 
@@ -96,12 +87,7 @@ class BlogsController extends Controller
         $attributes = $request->validated();
         unset($attributes['user_id']);
 
-        $blogItem = $this->repository->update($attributes, $id);
-
-        $response = [
-            'message' => 'Blog updated.',
-            'data' => $blogItem,
-        ];
+        $response = $this->repository->update($attributes, $id);
 
         return response()->json($response);
     }
@@ -121,6 +107,6 @@ class BlogsController extends Controller
         return response()->json([
             'message' => 'Blog deleted.',
             'deleted' => $deleted,
-        ]);
+        ], 200);
     }
 }
