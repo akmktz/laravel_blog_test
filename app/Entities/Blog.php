@@ -3,6 +3,7 @@
 namespace App\Entities;
 
 use App\Models\User;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Prettus\Repository\Contracts\Transformable;
@@ -16,7 +17,7 @@ use Prettus\Repository\Traits\TransformableTrait;
  */
 class Blog extends Model implements Transformable
 {
-    use TransformableTrait;
+    use TransformableTrait, HasFactory;
 
     /**
      * The model's attributes.

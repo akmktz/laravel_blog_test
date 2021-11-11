@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Entities\Blog;
 use Illuminate\Database\Seeder;
 
 class DatabaseSeeder extends Seeder
@@ -13,6 +14,10 @@ class DatabaseSeeder extends Seeder
      */
     public function run()
     {
-        // \App\Models\User::factory(10)->create();
+        $user = \App\Models\User::factory()->create();
+
+        Blog::factory(100)->create([
+            'user_id' => $user->id,
+        ]);
     }
 }
