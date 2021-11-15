@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Http\Requests\BlogCreateRequest;
 use App\Http\Requests\BlogUpdateRequest;
 use App\Repositories\BlogRepository;
+use Illuminate\Http\Request;
 
 /**
  * Class BlogsController.
@@ -34,9 +35,9 @@ class BlogsController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $blogsList = $this->repository->paginate();
+        $blogsList = $this->repository->paginate((int)$request->get('per_page', 10));
 
         return response()->json($blogsList);
     }
